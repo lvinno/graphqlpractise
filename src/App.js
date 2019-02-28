@@ -23,6 +23,13 @@ class App extends Component {
       newstate)
   }
 
+  handleTab(e){
+    if(e.keyCode === 9){
+      e.preventDefault();
+      e.target.value= e.target.value + "   ";
+    }
+  }
+
   handleSubmit(){
      console.log("submit") 
     let data = JSON.parse(this.state.textdata)
@@ -30,8 +37,8 @@ class App extends Component {
     axios({
       method: 'POST',
       url: 'http://localhost:4000/graphql',
-      data:{query: `${data}`}
-    }).then((res,err)=>{
+      data:{query:`${data}`}
+    }).then((res)=>{
       console.log(res)
       this.setState({
         response: JSON.stringify(res.data.data)
@@ -54,7 +61,10 @@ class App extends Component {
         <Row>
             <Col span={12}>
               <div className={style.inputWrapper}>
-                <TextArea rows={10} onChange={(e)=>this.handleTextChange(e)} className={style.input} />
+                <TextArea rows={10} onChange={(e)=>this.handleTextChange(e)} 
+                className={style.input}
+                onKeyDown={(e)=>this.handleTab(e)}
+                />
                 <Button type="primary" size="large" className={style.button} onClick={this.handleSubmit}>Submit</Button>
               </div>
             </Col>
