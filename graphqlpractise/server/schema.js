@@ -9,7 +9,13 @@ const users = [
 const schema = buildSchema(`
 type Query {
     users: [User]
-    User(id:String): User
+    User(id:String!): User
+}
+type Mutation {
+    updateUser(id:String!,input:UserInput): User
+}
+input UserInput {
+    name: String
 }
 type User{
     id: String
@@ -20,14 +26,24 @@ const root = {
     users:()=>{
         return users;
     },
-    User:(args)=>{
-        let a = {};
+    User:({id})=>{
+        let answer = {};
         users.forEach((item)=>{
-            if(item.id === args.id){
-                a = item;
+            if(item.id === id){
+                answer = item;
             }
         })
-        return a ;
+        return answer;
+    },
+    updateUser:({id,input})=>{
+        let answer = {};
+        users.forEach((item)=>{
+            if(item.id === id){
+                item.name = input.name;
+                answer = item;
+            }
+        })
+        return answer ;
     }
 }
 
