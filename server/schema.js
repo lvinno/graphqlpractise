@@ -22,6 +22,7 @@ type User{
     name: String
 }
 `)
+
 const root = {
     users:()=>{
         return users;
