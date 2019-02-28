@@ -41,12 +41,12 @@ class App extends Component {
     }).then((res)=>{
       console.log(res)
       this.setState({
-        response: JSON.stringify(res.data.data)
+        response: JSON.stringify(res.data.data,null,4)
       })
     }).catch((err)=>{
       console.log(err.response.data.errors[0])
       this.setState({
-        response: JSON.stringify(err.response.data.errors[0])
+        response: JSON.stringify(err.response.data.errors[0],null,4)
       })
     })
   }
