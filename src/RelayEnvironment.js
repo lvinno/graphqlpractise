@@ -10,7 +10,7 @@ import {
     operation,
     variables,
   ) {
-    return fetch('/graphql', {
+    return fetch('http://localhost:4000/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

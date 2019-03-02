@@ -9,16 +9,16 @@ const users = [
 const schema = buildSchema(`
 type Query {
     users: [User]
-    User(id:String!): User
+    User(id:ID!): User
 }
 type Mutation {
-    updateUser(id:String!,input:UserInput): User
+    updateUser(id:ID!,input:UserInput): User
 }
 input UserInput {
     name: String
 }
 type User{
-    id: String
+    id: ID
     name: String
 }
 `)

@@ -24,7 +24,10 @@ export default class App extends React.Component {
           if (!props) {
             return <div>Loading...</div>;
           }
-          return <div>Users: {props.users}</div>;
+          
+          return (<div>{props.users.map((item)=>{
+            return <div>{item.id} {item.name}</div>
+          })}</div>);
         }}
       />
     );
