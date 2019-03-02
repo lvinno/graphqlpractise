@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {graphql, QueryRenderer} from 'react-relay';
 import environment from './RelayEnvironment'
+import RelayUser from './RelayUser'
 
 
-export default class App extends React.Component {
+
+export default class App extends Component {
   render() {
+
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query RelayIndexQuery {
+          query RelayIndexQuery{
             users {
-              id
-              name
+              ...RelayUser_item
             }  
           }
         `}
@@ -25,9 +27,7 @@ export default class App extends React.Component {
             return <div>Loading...</div>;
           }
           
-          return (<div>{props.users.map((item)=>{
-            return <div>{item.id} {item.name}</div>
-          })}</div>);
+          return <div> {props.users.map(item => <RelayUser item={item} />)}</div>;
         }}
       />
     );

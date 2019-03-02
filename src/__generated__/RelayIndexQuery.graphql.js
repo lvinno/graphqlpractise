@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 36133a36f8bfc48355dfbdfd1479812e
+ * @relayHash 2c7e571d4f5ddfcad6913f70574d5c41
  */
 
 /* eslint-disable */
@@ -9,11 +9,11 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type RelayUser_item$ref = any;
 export type RelayIndexQueryVariables = {||};
 export type RelayIndexQueryResponse = {|
   +users: ?$ReadOnlyArray<?{|
-    +id: ?string,
-    +name: ?string,
+    +$fragmentRefs: RelayUser_item$ref
   |}>
 |};
 export type RelayIndexQuery = {|
@@ -26,41 +26,18 @@ export type RelayIndexQuery = {|
 /*
 query RelayIndexQuery {
   users {
+    ...RelayUser_item
     id
-    name
   }
+}
+
+fragment RelayUser_item on User {
+  id
+  name
 }
 */
 
-const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
-  {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "users",
-    "storageKey": null,
-    "args": null,
-    "concreteType": "User",
-    "plural": true,
-    "selections": [
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "id",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "name",
-        "args": null,
-        "storageKey": null
-      }
-    ]
-  }
-];
-return {
+const node/*: ConcreteRequest*/ = {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
@@ -68,23 +45,65 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
-    "selections": (v0/*: any*/)
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "users",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": true,
+        "selections": [
+          {
+            "kind": "FragmentSpread",
+            "name": "RelayUser_item",
+            "args": null
+          }
+        ]
+      }
+    ]
   },
   "operation": {
     "kind": "Operation",
     "name": "RelayIndexQuery",
     "argumentDefinitions": [],
-    "selections": (v0/*: any*/)
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "users",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "User",
+        "plural": true,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "id",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "name",
+            "args": null,
+            "storageKey": null
+          }
+        ]
+      }
+    ]
   },
   "params": {
     "operationKind": "query",
     "name": "RelayIndexQuery",
     "id": null,
-    "text": "query RelayIndexQuery {\n  users {\n    id\n    name\n  }\n}\n",
+    "text": "query RelayIndexQuery {\n  users {\n    ...RelayUser_item\n    id\n  }\n}\n\nfragment RelayUser_item on User {\n  id\n  name\n}\n",
     "metadata": {}
   }
 };
-})();
 // prettier-ignore
-(node/*: any*/).hash = '3fb2f9646473bf9613966e180e18deac';
+(node/*: any*/).hash = '5ac1e46ee1773dd76fc542c7c298b1ed';
 module.exports = node;
