@@ -16,6 +16,7 @@ export default class App extends Component {
             users {
               ...RelayUser_item
             }  
+           
           }
         `}
         variables={{}}

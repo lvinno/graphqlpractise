@@ -5,5 +5,5 @@ import RelayIndex from './RelayIndex'
 
 
 
-ReactDOM.render(<RelayIndex />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
